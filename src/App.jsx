@@ -1,9 +1,9 @@
-import React from 'react'
-import {Switch, Route} from "react-router-dom";
-import Header from './components/nav/Header';
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
-import Home from './pages/Home';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Header from "./components/nav/Header";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register.js";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
         <Route exact path="/register" component={Register} />
       </Switch>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

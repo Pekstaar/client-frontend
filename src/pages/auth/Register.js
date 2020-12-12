@@ -1,0 +1,66 @@
+import React, { useState } from "react";
+import { Input } from "antd";
+import { authentication } from "../../Firebase";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
+
+const Register = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const config = {
+      url: "http://localhost:3000/register/complete",
+      handleCodeInApp: true,
+    };
+
+    await authentication.sendSignInLinkToEmail(email, config);
+
+    NotificationManager.success(
+      `Email sent to ${email}. Click link to complete registration`
+    );
+
+    // store email on local storage
+
+    window.localStorage.setItem("registrationEmail", email);
+
+    //clear state
+    setEmail("");
+  };
+
+  const registerForm = () => (
+    <form onSubmit={handleSubmit}>
+      <Input
+        style={{ height: "3.5em" }}
+        type="email"
+        placeholder="Enter your email"
+        className="form-control"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        autoFocus
+      />
+
+      <button type="submit" className="btn btn-raised btn-secondary m-2">
+        Register
+      </button>
+    </form>
+  );
+
+  return (
+    <div className="container p-5">
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
+          <h5>SIGN-UP</h5>
+          <NotificationContainer />
+          {registerForm()}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Register;
