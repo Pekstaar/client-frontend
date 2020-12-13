@@ -7,16 +7,59 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 
-const RegisterComplete = () => {
+const RegisterComplete = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
     setEmail(window.localStorage.getItem("registrationEmail"));
+    console.log(window.location.href);
+    console.log(window.window.localStorage.getItem("registrationEmail"));
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validations
+    if (!email || !password) {
+      NotificationManager.error("Email and password required");
+      return;
+    }
+
+    if (password.length < 6) {
+      NotificationManager.error("Password must be atleast 6 characters Long");
+      return;
+    }
+
+    try {
+      const result = await authentication.signInWithEmailLink(
+        email,
+        window.location.href
+      );
+
+      if (result.user.emailVerified) {
+        //   remove userEmail form localStorage
+
+        window.localStorage.removeItem("registrationEmail");
+
+        // get User id
+
+        let user = authentication.currentUser;
+
+        await user.updatePassword(password);
+
+        const idTokenResult = await user.getIdTokenResult();
+
+        //redux Storage
+
+        console.log("User", user, "idToken", idTokenResult);
+
+        // redirect
+        // history.push("/");
+      }
+    } catch (error) {
+      NotificationManager.error(error.message);
+    }
   };
 
   const completeRegistrationForm = () => (
