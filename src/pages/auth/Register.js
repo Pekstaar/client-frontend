@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "antd";
 import { authentication } from "../../Firebase";
 import { NotificationManager } from "react-notifications";
+import { useSelector } from "react-redux";
 
-const Register = () => {
+const Register = ({ history }) => {
   const [email, setEmail] = useState("pekstaar@gmail.com");
+
+  const { user } = useSelector((state) => ({ ...state }));
+
+  // check if the user is logged in and send to homepage if true
+  useEffect(() => {
+    if (user && user.token) history.push("/");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const config = {
       // url declared in the environment(.env file)
-      // url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
-      url: "http://localhost:3000/register/complete",
+      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+      // url: "http://localhost:3000/register/complete",
       handleCodeInApp: true,
     };
 

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Input } from "antd";
 import { authentication, googleAuthProvider } from "../../Firebase";
 import { GooglePlusOutlined, SendOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NotificationManager from "react-notifications/lib/NotificationManager";
+import { Link } from "react-router-dom";
 
 // const { Password } = Input;
 
@@ -13,6 +14,14 @@ const Login = ({ history }) => {
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => ({ ...state }));
+
+  // check if the user is logged in and send to homepage if true
+  useEffect(() => {
+    if (user && user.token) history.push("/");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -125,6 +134,13 @@ const Login = ({ history }) => {
           >
             Sign in with Google
           </Button>
+
+          <Link
+            to="/forgot/password"
+            className="float-right text-danger font-weight-bold"
+          >
+            Forgot Password?
+          </Link>
         </div>
       </div>
     </div>
