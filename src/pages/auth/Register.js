@@ -4,7 +4,7 @@ import { authentication } from "../../Firebase";
 import { NotificationManager } from "react-notifications";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("pekstaar@gmail.com");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -2,15 +2,45 @@ import React, { useState } from "react";
 import { Button, Input } from "antd";
 import { authentication } from "../../Firebase";
 import { SendOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 
 // const { Password } = Input;
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login = ({ history }) => {
+  const [email, setEmail] = useState("pekstaar@gmail.com");
+  const [password, setPassword] = useState("passwad");
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    try {
+      const result = await authentication.signInWithEmailAndPassword(
+        email,
+        password
+      );
+      const { user } = result;
+      // console.log(result);
+      // react dispense
+      const idTokenResult = await user.getIdTokenResult();
+
+      dispatch({
+        type: "LOGGED_IN_USER",
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        },
+      });
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+      NotificationManager.error(error.message);
+      setLoading(false);
+    }
   };
 
   const loginForm = () => (

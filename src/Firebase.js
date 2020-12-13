@@ -4,12 +4,12 @@ import "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCttZ96_rYxhJ028C4rMdyJzrK80-84r-I",
-  authDomain: "ecom-merce.firebaseapp.com",
-  projectId: "ecom-merce",
-  storageBucket: "ecom-merce.appspot.com",
-  messagingSenderId: "458753835144",
-  appId: "1:458753835144:web:30e3356d7562da85901f3d",
+  apiKey: "AIzaSyBQem4ACll5t_B-3kib7cvjhxr4jjxCNWM",
+  authDomain: "ecommerce-e6f9e.firebaseapp.com",
+  projectId: "ecommerce-e6f9e",
+  storageBucket: "ecommerce-e6f9e.appspot.com",
+  messagingSenderId: "40375210512",
+  appId: "1:40375210512:web:01f418107fa11657c5f095",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

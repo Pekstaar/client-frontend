@@ -32,7 +32,8 @@ const App = () => {
 
     // perform unsubscription clean-up
     return unsubscribe();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
