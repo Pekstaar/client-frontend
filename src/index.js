@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App.jsx";
+import App from "./App.js";
 import { BrowserRouter } from "react-router-dom";
 import "antd/dist/antd.css";
 // Project based on pekstaar@gmail.com

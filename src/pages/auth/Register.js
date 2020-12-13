@@ -11,7 +11,8 @@ const Register = () => {
 
     const config = {
       // url declared in the environment(.env file)
-      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+      // url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+      url: "http://localhost:3000/register/complete",
       handleCodeInApp: true,
     };
 

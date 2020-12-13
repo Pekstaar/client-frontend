@@ -49,7 +49,7 @@ const RegisterComplete = ({ history }) => {
         console.log("User", user, "idToken", idTokenResult);
 
         // redirect
-        // history.push("/");
+        history.push("/");
       }
     } catch (error) {
       NotificationManager.error(error.message);
