@@ -9,7 +9,7 @@ import {
 import firebase from "firebase";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 //destructuring
 const { SubMenu, Item } = Menu;
@@ -19,6 +19,7 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const { user } = useSelector((state) => ({ ...state }));
 
   const handleClick = (e) => {
     // console.log();
@@ -39,24 +40,35 @@ const Header = () => {
   return (
     <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       <Item key="home" icon={<HomeOutlined />}>
-        <Link to="/">Home</Link>
+        <Link to="/">Home </Link>
       </Item>
 
-      <Item key="register" icon={<UserAddOutlined />} className="float-right">
-        <Link to="/register">Register</Link>
-      </Item>
-
-      <Item key="login" icon={<LoginOutlined />} className="float-right">
-        <Link to="/login">Login </Link>
-      </Item>
-
-      <SubMenu key="SubMenu" icon={<SettingOutlined />} title="Username">
-        <Item key="setting:1">Option 1</Item>
-        <Item key="setting:2">Option 2</Item>
-        <Item icon={<LogoutOutlined />} onClick={logout}>
-          Logout
+      {!user && ( // REGISTER navbar selection (displays if not signed in)
+        <Item key="register" icon={<UserAddOutlined />} className="float-right">
+          <Link to="/register">Register</Link>
         </Item>
-      </SubMenu>
+      )}
+
+      {!user && ( // LOGIN nav bar selection( displays if not signed in)
+        <Item key="login" icon={<LoginOutlined />} className="float-right">
+          <Link to="/login">Login </Link>
+        </Item>
+      )}
+
+      {user && ( // if user is signed in, display username part
+        <SubMenu
+          key="SubMenu"
+          icon={<SettingOutlined />}
+          title={user.email && user.email.split("@")[0]} // split email at the @ and grab the first item(username part)
+          className="float-right"
+        >
+          <Item key="setting:1">Option 1</Item>
+          <Item key="setting:2">Option 2</Item>
+          <Item icon={<LogoutOutlined />} onClick={logout}>
+            Logout
+          </Item>
+        </SubMenu>
+      )}
     </Menu>
   );
 };

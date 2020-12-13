@@ -118,7 +118,7 @@ const Login = ({ history }) => {
             type="danger"
             size="large"
             onClick={googleLogin}
-            className="my-3"
+            className="my-2"
             block
             shape="round"
             icon={<GooglePlusOutlined />}
