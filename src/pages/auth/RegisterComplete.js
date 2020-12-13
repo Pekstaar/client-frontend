@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "antd";
 import { authentication } from "../../Firebase";
-import {
-  NotificationContainer,
-  NotificationManager,
-} from "react-notifications";
-import "react-notifications/lib/notifications.css";
+import { NotificationManager } from "react-notifications";
 
 const RegisterComplete = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -13,8 +9,6 @@ const RegisterComplete = ({ history }) => {
 
   useEffect(() => {
     setEmail(window.localStorage.getItem("registrationEmail"));
-    console.log(window.location.href);
-    console.log(window.window.localStorage.getItem("registrationEmail"));
   }, []);
 
   const handleSubmit = async (e) => {
@@ -93,7 +87,6 @@ const RegisterComplete = ({ history }) => {
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <h5>Complete Signup </h5>
-          <NotificationContainer />
           {completeRegistrationForm()}
         </div>
       </div>

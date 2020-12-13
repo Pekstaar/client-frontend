@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "antd";
 import { authentication } from "../../Firebase";
-import {
-  NotificationContainer,
-  NotificationManager,
-} from "react-notifications";
-import "react-notifications/lib/notifications.css";
+import { NotificationManager } from "react-notifications";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -56,7 +52,7 @@ const Register = () => {
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <h5>SIGN-UP</h5>
-          <NotificationContainer />
+
           {registerForm()}
         </div>
       </div>

@@ -1,5 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { NotificationContainer } from "react-notifications";
+import "react-notifications/lib/notifications.css";
+
 import Header from "./components/nav/Header";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register.js";
@@ -10,6 +13,7 @@ const App = () => {
   return (
     <>
       <Header />
+      <NotificationContainer />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
