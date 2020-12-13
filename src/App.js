@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import "react-notifications/lib/notifications.css";
 
 import Header from "./components/nav/Header";
-import Login from "./pages/auth/Login";
+import Login from "./pages/auth/Login.js";
 import Register from "./pages/auth/Register.js";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import Home from "./pages/Home";

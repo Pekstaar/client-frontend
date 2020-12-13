@@ -6,6 +6,7 @@ import { NotificationManager } from "react-notifications";
 const RegisterComplete = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirm] = useState("");
 
   useEffect(() => {
     setEmail(window.localStorage.getItem("registrationEmail"));
@@ -15,6 +16,11 @@ const RegisterComplete = ({ history }) => {
     e.preventDefault();
 
     // Validations
+    if (confirmPassword !== password) {
+      NotificationManager.error("Passwords do not Match!");
+      return;
+    }
+
     if (!email || !password) {
       NotificationManager.error("Email and password required");
       return;
@@ -49,7 +55,7 @@ const RegisterComplete = ({ history }) => {
         console.log("User", user, "idToken", idTokenResult);
 
         // redirect
-        history.push("/");
+        // history.push("/");
       }
     } catch (error) {
       NotificationManager.error(error.message);
@@ -66,7 +72,7 @@ const RegisterComplete = ({ history }) => {
         disabled
       />
 
-      <Input
+      <Input.Password
         style={{ height: "3.5em" }}
         type="password"
         placeholder="Input Password"
@@ -76,6 +82,13 @@ const RegisterComplete = ({ history }) => {
         autoFocus
       />
 
+      <Input.Password
+        style={{ height: "3.5em" }}
+        placeholder="confirm Password"
+        className="form-control my-3"
+        value={confirmPassword}
+        onChange={(e) => setConfirm(e.target.value)}
+      />
       <button type="submit" className="btn btn-raised btn-secondary m-2">
         Register
       </button>
