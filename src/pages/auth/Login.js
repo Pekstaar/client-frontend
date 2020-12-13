@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Input } from "antd";
-import { authentication } from "../../Firebase";
-import { SendOutlined } from "@ant-design/icons";
+import { authentication, googleAuthProvider } from "../../Firebase";
+import { GooglePlusOutlined, SendOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 
@@ -16,6 +16,7 @@ const Login = ({ history }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setLoading(true);
 
     try {
@@ -37,10 +38,32 @@ const Login = ({ history }) => {
       });
       history.push("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       NotificationManager.error(error.message);
       setLoading(false);
     }
+  };
+
+  const googleLogin = async (e) => {
+    authentication
+      .signInWithPopup(googleAuthProvider)
+      .then(async (result) => {
+        const { user } = result;
+        const idToken = await user.getIdTokenResult();
+
+        //set reducer to email and login token(keeps one logged in )
+        dispatch({
+          type: "LOGGED_IN_USER",
+          payload: {
+            email: user.email,
+            token: idToken.token,
+          },
+        });
+
+        // redirect to dashboard(signed in)
+        history.push("/");
+      })
+      .catch((error) => NotificationManager.error);
   };
 
   const loginForm = () => (
@@ -83,8 +106,25 @@ const Login = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          <h5 className="float-center mx-3">SIGN-IN</h5>
+          {loading ? (
+            <h5 className="float-center mx-3 text-warning ">Loading...</h5>
+          ) : (
+            <h5 className="float-center mx-3">SIGN-IN</h5>
+          )}
+
           {loginForm()}
+
+          <Button
+            type="danger"
+            size="large"
+            onClick={googleLogin}
+            className="my-3"
+            block
+            shape="round"
+            icon={<GooglePlusOutlined />}
+          >
+            Sign in with Google
+          </Button>
         </div>
       </div>
     </div>
