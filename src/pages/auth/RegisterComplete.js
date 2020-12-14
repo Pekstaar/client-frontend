@@ -85,7 +85,7 @@ const RegisterComplete = ({ history }) => {
       <Input.Password
         style={{ height: "3.5em" }}
         placeholder="confirm Password"
-        className="form-control my-3"
+        className="form-control mt-1 mb-3"
         value={confirmPassword}
         onChange={(e) => setConfirm(e.target.value)}
       />
