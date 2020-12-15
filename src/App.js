@@ -9,9 +9,12 @@ import Login from "./pages/auth/Login.js";
 import Register from "./pages/auth/Register.js";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import Home from "./pages/Home";
+
 import { authentication } from "./Firebase";
 import { ForgotPassword } from "./pages/auth/ForgotPassword";
 import { currentUser } from "./functions/auth";
+import { History } from "./pages/History";
+import { UserRoute } from "./components/routes/UserRoute";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -53,6 +56,8 @@ const App = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/register/complete" component={RegisterComplete} />
         <Route exact path="/forgot/password" component={ForgotPassword} />
+        <UserRoute exact path="/user/history" component={History} />
+        {/* conditioned private route */}
       </Switch>
     </>
   );
