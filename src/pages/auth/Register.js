@@ -25,6 +25,8 @@ const Register = ({ history }) => {
       handleCodeInApp: true,
     };
 
+    console.log(config.url);
+
     await authentication.sendSignInLinkToEmail(email, config);
 
     NotificationManager.success(

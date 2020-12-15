@@ -11,6 +11,7 @@ import RegisterComplete from "./pages/auth/RegisterComplete";
 import Home from "./pages/Home";
 import { authentication } from "./Firebase";
 import { ForgotPassword } from "./pages/auth/ForgotPassword";
+import { currentUser } from "./functions/auth";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,20 +20,26 @@ const App = () => {
     const unsubscribe = authentication.onAuthStateChanged(async (user) => {
       if (user) {
         const idTokenResult = await user.getIdTokenResult();
-        console.log(user);
-
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-        });
+        console.log("user", user);
+        currentUser(idTokenResult.token)
+          .then((res) => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                name: res.data.name,
+                email: res.data.email,
+                token: idTokenResult.token,
+                role: res.data.role,
+                _id: res.data._id,
+              },
+            });
+          })
+          .catch((err) => console.log(err));
       }
     });
 
     // perform unsubscription clean-up
-    return unsubscribe();
+    return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

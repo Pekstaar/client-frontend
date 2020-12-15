@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Input } from "antd";
 import { authentication } from "../../Firebase";
 import { NotificationManager } from "react-notifications";
+import { useDispatch } from "react-redux";
+import { createOrUpdateUser } from "../../functions/auth";
 
 const RegisterComplete = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirm] = useState("");
+
+  const dispatch = useDispatch();
+
+  // const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     setEmail(window.localStorage.getItem("registrationEmail"));
@@ -54,6 +60,20 @@ const RegisterComplete = ({ history }) => {
 
         console.log("User", user, "idToken", idTokenResult);
 
+        createOrUpdateUser(idTokenResult.token)
+          .then((res) => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                name: res.data.name,
+                email: res.data.email,
+                token: idTokenResult.token,
+                role: res.data.role,
+                _id: res.data._id,
+              },
+            });
+          })
+          .catch((err) => console.log(err));
         // redirect
         history.push("/");
       }
