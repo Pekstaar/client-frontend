@@ -18,6 +18,14 @@ const Login = ({ history }) => {
 
   const { user } = useSelector((state) => ({ ...state }));
 
+  const roleBasedRedirect = (res) => {
+    if (res.data.role === "admin") {
+      history.push("/admin/dashboard");
+    } else {
+      history.push("/user/history");
+    }
+  };
+
   // check if the user is logged in and send to homepage if true
   useEffect(() => {
     if (user && user.token) history.push("/");
@@ -51,12 +59,14 @@ const Login = ({ history }) => {
               _id: res.data._id,
             },
           });
+
+          roleBasedRedirect(res);
         })
         .catch((err) => {
           console.log(err);
         });
 
-      history.push("/");
+      // history.push("/");
     } catch (error) {
       // console.log(error);
       NotificationManager.error(error.message);
@@ -84,11 +94,12 @@ const Login = ({ history }) => {
                 _id: res.data._id,
               },
             });
+            roleBasedRedirect(res);
           })
           .catch((err) => console.log(err));
 
         // redirect to dashboard(signed in)
-        history.push("/");
+        // history.push("/");
       })
       .catch((error) => NotificationManager.error);
   };
