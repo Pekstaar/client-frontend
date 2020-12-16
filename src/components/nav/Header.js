@@ -60,10 +60,25 @@ const Header = () => {
           key="SubMenu"
           icon={<SettingOutlined />}
           title={user.email && user.email.split("@")[0]} // split email at the @ and grab the first item(username part)
-          className="float-right"
+          className="float-right px-3 font-weight-bold "
+          style={{
+            fontSize: "16px",
+            // fontStyle: "italic",
+            textTransform: "uppercase",
+          }}
         >
-          <Item key="setting:1">Option 1</Item>
-          <Item key="setting:2">Option 2</Item>
+          {user && user.role === "subscriber" && (
+            <Item key="setting:1">
+              <Link to="/user/history">Dashboard</Link>
+            </Item>
+          )}
+
+          {user && user.role === "admin" && (
+            <Item key="setting:1">
+              <Link to="/admin/dashboard">Dashboard</Link>
+            </Item>
+          )}
+
           <Item icon={<LogoutOutlined />} onClick={logout}>
             Logout
           </Item>
