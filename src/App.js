@@ -9,6 +9,7 @@ import Login from "./pages/auth/Login.js";
 import Register from "./pages/auth/Register.js";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import Home from "./pages/Home";
+import AdminDashbord from "./pages/admin/AdminDashbord.js";
 
 import { History } from "./pages/user/History.js";
 import { authentication } from "./Firebase";
@@ -17,6 +18,7 @@ import { currentUser } from "./functions/auth";
 import { UserRoute } from "./components/routes/UserRoute";
 import { Password } from "./pages/user/Password.js";
 import { WishList } from "./pages/user/Wishlist.js";
+import { AdminRoute } from "./components/routes/AdminRoute.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -62,6 +64,7 @@ const App = () => {
         <UserRoute exact path="/user/password" component={Password} />
         <UserRoute exact path="/user/wishlist" component={WishList} />
         {/* conditioned private route */}
+        <AdminRoute exact path="/admin/dashboard" component={AdminDashbord} />
       </Switch>
     </>
   );
