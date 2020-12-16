@@ -4,17 +4,19 @@ import { NotificationContainer } from "react-notifications";
 import { useDispatch } from "react-redux";
 import "react-notifications/lib/notifications.css";
 
-import Header from "./components/nav/Header";
+import Header from "./components/nav/Header.js";
 import Login from "./pages/auth/Login.js";
 import Register from "./pages/auth/Register.js";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import Home from "./pages/Home";
 
+import { History } from "./pages/user/History.js";
 import { authentication } from "./Firebase";
 import { ForgotPassword } from "./pages/auth/ForgotPassword";
 import { currentUser } from "./functions/auth";
-import { History } from "./pages/History";
 import { UserRoute } from "./components/routes/UserRoute";
+import { Password } from "./pages/user/Password.js";
+import { WishList } from "./pages/user/Wishlist.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -57,6 +59,8 @@ const App = () => {
         <Route exact path="/register/complete" component={RegisterComplete} />
         <Route exact path="/forgot/password" component={ForgotPassword} />
         <UserRoute exact path="/user/history" component={History} />
+        <UserRoute exact path="/user/password" component={Password} />
+        <UserRoute exact path="/user/wishlist" component={WishList} />
         {/* conditioned private route */}
       </Switch>
     </>
