@@ -20,6 +20,7 @@ import { UserRoute } from "./components/routes/UserRoute";
 import { Password } from "./pages/user/Password.js";
 import { WishList } from "./pages/user/Wishlist.js";
 import { AdminRoute } from "./components/routes/AdminRoute.js";
+import CategoryUpdate from "./pages/admin/category/CategoryUpdate.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -67,6 +68,11 @@ const App = () => {
         {/* conditioned private route */}
         <AdminRoute exact path="/admin/dashboard" component={AdminDashbord} />
         <AdminRoute exact path="/admin/category" component={CategoryCreate} />
+        <AdminRoute
+          exact
+          path="/admin/category/:slug"
+          component={CategoryUpdate}
+        />
       </Switch>
     </>
   );

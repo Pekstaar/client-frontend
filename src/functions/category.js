@@ -19,7 +19,7 @@ export const removeCategory = async (slug, authtoken) =>
 
 // category update - must contain token
 export const updateCategory = async (slug, category, authtoken) =>
-  await axios.put(`${process.env.REACT_APP_API}/category/${slug}`, {
+  await axios.put(`${process.env.REACT_APP_API}/category/${slug}`, category, {
     headers: {
       authtoken,
     },
