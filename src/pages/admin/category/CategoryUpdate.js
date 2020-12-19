@@ -1,8 +1,7 @@
-import { SendOutlined } from "@ant-design/icons";
-import { Button, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import { NotificationManager } from "react-notifications";
 import { useSelector } from "react-redux";
+import CategoryForm from "../../../components/forms/CategoryForm";
 import AdminNav from "../../../components/nav/AdminNav";
 import { getCategory, updateCategory } from "../../../functions/category";
 
@@ -42,44 +41,6 @@ const CategoryUpdate = ({ history, match }) => {
     // setLoading(true);
   };
 
-  const categoryForm = () => (
-    <form style={{ padding: ".3em 3em" }} onSubmit={handleSubmit}>
-      <div className="form-group">
-        <strong className="mx-2" style={{ fontSize: "16px" }}>
-          NAME:
-        </strong>
-        <Input
-          style={{
-            height: "3.5em",
-            margin: "auto",
-            fontSize: "16px",
-            maxWidth: "45em",
-          }}
-          type="text"
-          placeholder="Input category name . . ."
-          className="form-control"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          autoFocus
-          required
-        />
-      </div>
-      <Button
-        type="primary"
-        size="large"
-        onClick={handleSubmit}
-        block
-        shape="round"
-        icon={<SendOutlined />}
-        className="col-md-3"
-        style={{ margin: "2px 30%" }}
-        disabled={name.length < 3}
-      >
-        Submit
-      </Button>
-    </form>
-  );
-
   return (
     <div className="container-fluid">
       <div className="row ">
@@ -97,7 +58,11 @@ const CategoryUpdate = ({ history, match }) => {
           ) : (
             <h4 className="mb-4">Update Category</h4>
           )}
-          {categoryForm()}
+          <CategoryForm
+            handleSubmit={handleSubmit}
+            name={name}
+            setName={setName}
+          />
           {/* {categories.map((c) => (
             <div
               className="alert alert-primary "

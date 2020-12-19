@@ -1,5 +1,4 @@
 import axios from "axios";
-import { NotificationManager } from "react-notifications";
 
 // Get Connection Status
 export const DBStatus = async () => {
