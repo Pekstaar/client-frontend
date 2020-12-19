@@ -21,6 +21,7 @@ import { Password } from "./pages/user/Password.js";
 import { WishList } from "./pages/user/Wishlist.js";
 import { AdminRoute } from "./components/routes/AdminRoute.js";
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate.js";
+import { DBStatus } from "./functions/DBConn.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <div onLoad={DBStatus}>
       <Header />
       <NotificationContainer />
       <Switch>
@@ -74,7 +75,7 @@ const App = () => {
           component={CategoryUpdate}
         />
       </Switch>
-    </>
+    </div>
   );
 };
 
