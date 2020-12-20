@@ -2,11 +2,7 @@ import { Button } from "antd";
 import React, { useEffect, useState } from "react";
 import AdminNav from "../../../components/nav/AdminNav";
 import { useSelector } from "react-redux";
-import {
-  DeleteOutlined,
-  EditOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { NotificationManager } from "react-notifications";
 import {
   createCategory,
@@ -15,7 +11,7 @@ import {
 } from "../../../functions/category";
 import { Link } from "react-router-dom";
 import CategoryForm from "../../../components/forms/CategoryForm";
-import Search from "antd/lib/input/Search";
+import Search from "../../../components/forms/Search";
 
 const CategoryCreate = () => {
   const [name, setName] = useState("");
@@ -77,10 +73,6 @@ const CategoryCreate = () => {
     }
   };
 
-  const handleSearch = (e) => {
-    setKeyword(e.target.value.toLowerCase());
-  };
-
   const searched = (k) => (c) => c.name.toLowerCase().includes(k);
 
   return (
@@ -92,7 +84,7 @@ const CategoryCreate = () => {
 
         <div className="col-md-8 mt-4 " style={{ margin: "0 auto" }}>
           <nav
-            className="navbar mb-4 bg-light form-inline"
+            className="navbar mb-1 bg-light form-inline"
             style={{ borderRadius: "10px 10px 0 0", width: "100%" }}
           >
             {loading ? (
@@ -110,35 +102,8 @@ const CategoryCreate = () => {
                 new-category
               </h4>
             )}
-            {/* <Search
-              placeholder="Filter category"
-              allowClear
-              enterButton="Search"
-              className="float-right col-md-5 "
-              style={{ height: "2.9em" }}
-              onSearch={handleSearch}
-            /> */}
 
-            <div class="input-group ">
-              <input
-                type="text"
-                class="form-control mr-sm-2 px-2"
-                placeholder="Filter Category"
-                style={{ width: "18em", background: "#fff", height: "2.4em" }}
-                onChange={handleSearch}
-              />
-
-              <span class="">
-                <Button
-                  type="primary"
-                  // shape="circle"
-                  icon={<SearchOutlined />}
-                  size={"medium"}
-                  className="float-right"
-                  // onClick={handleClick}
-                />
-              </span>
-            </div>
+            <Search setKeyword={setKeyword} keyword={keyword} />
           </nav>
           <div className="bg-light p-2">
             {/* {categoryForm()} */}
