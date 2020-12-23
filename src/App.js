@@ -10,7 +10,9 @@ import Register from "./pages/auth/Register.js";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import Home from "./pages/Home";
 import AdminDashbord from "./pages/admin/AdminDashbord.js";
+import CategoryUpdate from "./pages/admin/category/CategoryUpdate.js";
 import CategoryCreate from "./pages/admin/category/CategoryCreate.js";
+import SubCategory from "./pages/admin/category/subcategory.js";
 
 import { History } from "./pages/user/History.js";
 import { authentication } from "./Firebase";
@@ -20,7 +22,6 @@ import { UserRoute } from "./components/routes/UserRoute";
 import { Password } from "./pages/user/Password.js";
 import { WishList } from "./pages/user/Wishlist.js";
 import { AdminRoute } from "./components/routes/AdminRoute.js";
-import CategoryUpdate from "./pages/admin/category/CategoryUpdate.js";
 import { DBStatus } from "./functions/DBConn.js";
 
 const App = () => {
@@ -74,6 +75,7 @@ const App = () => {
           path="/admin/category/:slug"
           component={CategoryUpdate}
         />
+        <AdminRoute exact path="/admin/sub" component={SubCategory} />
       </Switch>
     </div>
   );
