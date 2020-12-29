@@ -23,7 +23,7 @@ const CategoryCreate = () => {
 
   useEffect(() => {
     loadCategories();
-  }, [name]);
+  }, []);
 
   const loadCategories = () => {
     getCategories().then((c) => setCategories(c.data));
@@ -42,10 +42,11 @@ const CategoryCreate = () => {
           "Success"
         );
         setName("");
+        loadCategories();
       })
       .catch((err) => {
         setLoading(false);
-        if (err.response.status === 400)
+        if (err.status === 400)
           NotificationManager.error(err.response.data, "Error!", 2000);
       });
   };
@@ -112,6 +113,7 @@ const CategoryCreate = () => {
               name={name}
               setName={setName}
             />
+            {/* reload buttton */}
 
             {categories.filter(searched(keyword)).map((c) => (
               <div

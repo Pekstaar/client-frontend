@@ -27,7 +27,7 @@ const CategoryForm = ({ handleSubmit, name, setName }) => (
         style={{ height: "3em", borderRadius: " 0 5px 5px 0" }}
         type="primary"
         onClick={handleSubmit}
-        disabled={name.length < 3}
+        disabled={name.length < 2}
       >
         <PlusOutlined
           style={{ fontSize: "18px", fontWeight: "bold", textAlign: "center" }}

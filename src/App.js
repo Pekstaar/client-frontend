@@ -12,7 +12,6 @@ import Home from "./pages/Home";
 import AdminDashbord from "./pages/admin/AdminDashbord.js";
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate.js";
 import CategoryCreate from "./pages/admin/category/CategoryCreate.js";
-import SubCategory from "./pages/admin/category/subcategory.js";
 
 import { History } from "./pages/user/History.js";
 import { authentication } from "./Firebase";
@@ -23,6 +22,8 @@ import { Password } from "./pages/user/Password.js";
 import { WishList } from "./pages/user/Wishlist.js";
 import { AdminRoute } from "./components/routes/AdminRoute.js";
 import { DBStatus } from "./functions/DBConn.js";
+import SubCategory from "./pages/admin/category/sub/subCreate.js";
+import SubUpdate from "./pages/admin/category/sub/subUpdate.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -76,6 +77,7 @@ const App = () => {
           component={CategoryUpdate}
         />
         <AdminRoute exact path="/admin/sub" component={SubCategory} />
+        <AdminRoute exact path="/admin/sub/:slug" component={SubUpdate} />
       </Switch>
     </div>
   );
