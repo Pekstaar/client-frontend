@@ -25,7 +25,7 @@ import {
 import { Button, Tooltip } from "antd";
 import { Link } from "react-router-dom";
 
-const SubCategory = () => {
+const SubCreate = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -219,4 +219,4 @@ const SubCategory = () => {
   );
 };
 
-export default SubCategory;
+export default SubCreate;

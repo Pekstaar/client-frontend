@@ -22,8 +22,9 @@ import { Password } from "./pages/user/Password.js";
 import { WishList } from "./pages/user/Wishlist.js";
 import { AdminRoute } from "./components/routes/AdminRoute.js";
 import { DBStatus } from "./functions/DBConn.js";
-import SubCategory from "./pages/admin/category/sub/subCreate.js";
 import SubUpdate from "./pages/admin/category/sub/subUpdate.js";
+import ProductCreate from "./pages/admin/product/ProductCreate.js";
+import SubCreate from "./pages/admin/category/sub/subCreate.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -76,8 +77,9 @@ const App = () => {
           path="/admin/category/:slug"
           component={CategoryUpdate}
         />
-        <AdminRoute exact path="/admin/sub" component={SubCategory} />
+        <AdminRoute exact path="/admin/sub" component={SubCreate} />
         <AdminRoute exact path="/admin/sub/:slug" component={SubUpdate} />
+        <AdminRoute exact path="/admin/product" component={ProductCreate} />
       </Switch>
     </div>
   );
